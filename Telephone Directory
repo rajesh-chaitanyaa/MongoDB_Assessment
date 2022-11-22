@@ -1,0 +1,51 @@
+
+import pymongo
+
+from pymongo import MongoClient
+
+myclient = pymongo.MongoClient('mongodb://localhost:27017/')
+mydb = myclient['mydatabase']
+mycol = mydb["customers"]
+
+mydict = {'name':'Rajesh','phone number':'9094295538','location':'Chennai'}
+
+x = mycol.insert_one(mydict)  
+
+print(x)
+
+
+
+
+mylist = [
+  { 'name': 'Anand','phone number':'9957825532','location': 'Kolkata'},
+  { 'name': 'Usha','phone number':'9419289553','location': 'Bangalore'},
+  { 'name': 'Gowtham','phone number':'9219795534','location': 'Vizhag'},
+  { 'name': 'Sandy','phone number':'9994295538','location': 'Kochi'},
+  { 'name': 'Yamir','phone number':'9094295535','location': 'Kanpur'},
+  { 'name': 'Vijay','phone number':'9094299372','location': 'Mumbai'},
+  { 'name': 'Susan','phone number':'95948262531','location': 'Delhi'},
+  { 'name': 'Vicky','phone number':'9194295538','location': 'Mangalore'},
+  { 'name': 'Bharath','phone number':'9196424535','location': 'Hyderabad'},
+  { 'name': 'Uma','phone number':'9099306434','location': 'Cuddalore'},
+  { 'name': 'Raja','phone number':'9654395538','location': 'Goa'},
+  { 'name': 'Suresh','phone number':'9998295039','location': 'Trichy'}
+]
+
+x = mycol.insert_many(mylist)
+
+print(x.inserted_ids)
+
+
+query = {'location':'Goa'}
+update = {'$set':{'location':'Bhopal'}}
+
+mycol.update_one(query,update)
+
+for x in mycol.find():
+    print(x)
+
+
+
+query = {'name':'Delhi'}
+
+mycol.delete_one(query)
