@@ -1,0 +1,2 @@
+db.student.find({"scores":{$gt:98}})
+db.student.find({"scores":{$lt:40}})
